@@ -1,11 +1,22 @@
-import React from "react";
+import React from 'react';
 
-function Item({ name, category }) {
+function Item({ updateCart, cart, name, category }) {
+  function handleCartButton() {
+    if (!cart.includes(name)) {
+      updateCart([...cart, name]);
+    } else {
+      let filteredCart = cart.filter((item) => item !== name);
+      updateCart(filteredCart);
+    }
+  }
+
   return (
     <li className="">
       <span>{name}</span>
       <span className="category">{category}</span>
-      <button className="add">Add to Cart</button>
+      <button onClick={handleCartButton} className="add">
+        {cart.includes(name) ? 'Remove from Cart' : 'Add to Cart'}
+      </button>
     </li>
   );
 }
